@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+            <div class="titleWraper previewlayer">
+                <div class="title">
+                    <div class="line" style ="border-bottom: solid 2px #F36223;"></div>
+                    <div class="titletext">Ape buona</div>
+                </div>
+                <div class="titleDescription" >Добрая пчела</div>
+            </div>
+
+            <div class="content previewlayer">
+                <!-- тут будет основная изменяемая часть-->
+                <div class="section">
+                    <div class="sectionInfo">
+                        <div class="count">01</div>
+                        <div class="sectionHeader">
+                            <div class="line" style ="border-bottom: solid 2px #F36223;"></div>
+                            <div class="sectionTitle">Мы предлагаем</div>
+                        </div>
+                        <div class="infoTitle">Кто мы</div>
+                        <div class="infoText">Мы- семья из Санкт-Петербурга, сменившая парадный центр Северной Столицы на лес и ручей на Карельском перешейке. Крепкие хутора стояли здесь еще 400 лет назад и мы бережно возрождаем счастливую жизнь этого края. Наше фермерское хозяйство совсем молодое, но уже второй год добрые пчелы приносят нам по 500 кг прекрасного меда. В просторной, как в ботаническом саду, теплице, у нас круглый год зеленеют не только овощи, но и тропические растения. Всегда рады гостям – и взрослым и детям. </div>
+                    </div>
+                    <div class="sectionImage">
+                        <img src="../static/images/Vosk.jpg" width="400" height="600">
+                    </div>
+                </div>
+            </div>
+            <div class="content2 previewlayer">
+                <!-- тут будет основная изменяемая часть-->
+                <div class="section">
+                    <div class="sectionInfo">
+                        <div class="count">02</div>
+                        <div class="sectionHeader">
+                            <div class="line" style ="border-bottom: solid 2px #F36223;"></div>
+                            <div class="sectionTitle">Проект агротуризм</div>
+                        </div>
+                        <div class="infoTitle">Дары природы</div>
+                        <div class="infoText">Мы- семья из Санкт-Петербурга, сменившая парадный центр Северной Столицы на лес и ручей на Карельском перешейке. Крепкие хутора стояли здесь еще 400 лет назад и мы бережно возрождаем счастливую жизнь этого края. Наше фермерское хозяйство совсем молодое, но уже второй год добрые пчелы приносят нам по 500 кг прекрасного меда. В просторной, как в ботаническом саду, теплице, у нас круглый год зеленеют не только овощи, но и тропические растения. Всегда рады гостям – и взрослым и детям. </div>
+                    </div>
+                    <div class="sectionImage">
+                        <img src="../static/images/Pchelovodi.jpg" width="400" height="600">
+                    </div>
+                </div>
+            </div>
+            <div class="content3 previewlayer">
+                <!-- тут будет основная изменяемая часть-->
+                <div class="section">
+                    <div class="sectionInfo">
+                        <div class="count">03</div>
+                        <div class="sectionHeader">
+                            <div class="line" style ="border-bottom: solid 2px #F36223;"></div>
+                            <div class="sectionTitle">Наши контакты</div>
+                        </div>
+                        <div class="infoTitle">Где мы находимся</div>
+                        <div class="infoText">Мы- семья из Санкт-Петербурга, сменившая парадный центр Северной Столицы на лес и ручей на Карельском перешейке. Крепкие хутора стояли здесь еще 400 лет назад и мы бережно возрождаем счастливую жизнь этого края. Наше фермерское хозяйство совсем молодое, но уже второй год добрые пчелы приносят нам по 500 кг прекрасного меда. В просторной, как в ботаническом саду, теплице, у нас круглый год зеленеют не только овощи, но и тропические растения. Всегда рады гостям – и взрослым и детям. </div>
+                    </div>
+                    <div class="sectionImage">
+                        <img src="../static/images/Mjed.jpg" width="400" height="600">
+                    </div>
+                </div>
+            </div>
+            <div class="indexContent">
+            {% for item in news %}
+            <div class="col border rounded">
+                <h2>{{ item.title }}</h2>
+                <div class="h4">{{ item.content }}</div>
+                <div class="h4">{{ item.user.name }} - {{ item.created_date.strftime('%d-%m-%Y %H:%M') }}</div>
+                {% if current_user.is_authenticated and current_user == item.user %}
+                    <a href="/news/{{ item.id }}" class="btn btn-sm btn-warning">Изменить</a>&nbsp; &nbsp;
+                    <a href="/news_del/{{ item.id }}" class="btn btn-sm btn-danger">Удалить</a>
+                {% endif %}
+            <br><br></div>
+            {% endfor %}
+            {% if current_user.is_authenticated %}
+                <br><a href="news" class="btn btn-secondary">Добавить новость</a><br><br>
+            {% endif %}
+            </div>
+
+{% endblock %}

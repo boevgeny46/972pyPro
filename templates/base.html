@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+</head>
+<body>
+    <div class="main">
+        <div class="preview">
+            <div class="previewimage previewlayer"></div>
+            <div class="header previewlayer">
+                <!-- здесь header-->
+                <div class="logoWrapper">
+                    <a href="/index"><img src="../static/images/icons864.png"></a>
+                </div>
+<!--                # здесь меняем текст в navbar-->
+                <div class="nav">
+                    <div class="navItem"><a href="/news">Новости с полей</a></div>
+                    <div class="navItem"><a href="/weatherForm">Погода в "Добрых пчелах"</a></div>
+                    {% if current_user.is_authenticated %}
+                        <div class="navItem"><a href="/logout">{{ current_user.name }}</a></div>
+                        <div class="navItem"><a href="/form_sample">Форма</a></div>
+                    {% else  %}
+                        <div class="navItem"><a href="/form_sample">Зарегистрироваться</a></div>
+                    {% endif %}
+                </div>
+
+                <div class="wrapperAccount">
+                    <a href="/form_sample"><img src="../static/images/icons60.png"></a>
+                    {% if current_user.is_authenticated %}
+                        <div class="accountTitle"><a href="/logout">Профиль</a></div>
+                    {% else  %}
+                        <div class="accountTitle"><a href="/login">Войти</a></div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="container">
+                {% block content %}{% endblock %}
+            </div>
+
+
+        </div>
+    </div>
+</body>
+</html>
